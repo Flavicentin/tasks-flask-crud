@@ -18,7 +18,7 @@ def create_task():
     tasks.append(new_task)
     task_id_control += 1
 
-    return jsonify({"message": "Nova Tarefa Criada Com Sucesso!"})
+    return jsonify({"message": "Nova Tarefa Criada Com Sucesso!", "id": new_task.id})
 
 
 # pega tarefas 
@@ -52,17 +52,13 @@ def update_task(id):
             task = t
             break
     
-    print(task)
     if task == None:
         return jsonify({"message": "Não foi possível encontrar a atividade"}), 404
-    
     
     data = request.get_json()
     task.title = data.get("title")
     task.description = data.get("description")
     task.completed = data.get("completed")
-
-    print(task)
     
     return jsonify({"message": "Tarefa Atualizada!"})
 
